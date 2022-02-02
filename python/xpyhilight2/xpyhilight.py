@@ -1,10 +1,10 @@
 """Python 3 plugin for HexChat that prints highlights onto its own window.
 """
 
-__module_name__ 		= "xPyHilight"
-__module_version__ 		= "2.5"
-__module_description__ 	= "Keeps track of highlights"
-__module_author__       = "Dan Boklöv Palovaara <dan@boklov.com>"
+__module_name__			= "xPyHilight"
+__module_version__		= "2.5"
+__module_description__	= "Keeps track of highlights"
+__module_author__		= "Dan Boklöv Palovaara <dan@boklov.com>"
 
 import hexchat
 
@@ -67,8 +67,8 @@ def convert_irc_codes(str):
 
 	return re.sub(r"(%[%CHBORUI]|\$(\d|t|a\d{3}))", lambda m: cmap.get(m[0], chr(int(m[0][2:])) if m[0][:2] == "$a" else m[0]), str)
 
-__message_tpl__ = hexchat.get_info("event_text Channel Msg Hilight")
-__action_tpl__ = hexchat.get_info("event_text Channel Action Hilight")
+__message_tpl__ = hexchat.get_info("event_text Channel Message")
+__action_tpl__ = hexchat.get_info("event_text Channel Action")
 
 hexchat.hook_print_attrs("Channel Msg Hilight", callback, userdata="message")
 hexchat.hook_print_attrs("Channel Action Hilight", callback, userdata="action")
