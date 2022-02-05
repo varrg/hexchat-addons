@@ -21,7 +21,7 @@ def callback(word, word_eol, userdata, attrs):
 		if hexchat.get_info("away") is None:
 			return hexchat.EAT_NONE
 	
-	if any([hexchat.nickcmp(nick, ignore) == 0 for ignore in options["ignore"]]):
+	if any([hexchat.nickcmp(word[0], ignore) == 0 for ignore in options["ignore"]]):
 		return hexchat.EAT_NONE
 	
 	#context = hexchat.find_context(server=xchat.get_info("server"), channel=options["window"])
