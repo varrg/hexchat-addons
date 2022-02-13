@@ -7,6 +7,8 @@ __module_description__	= "Keeps track of highlights"
 __module_author__		= "Dan Boklöv Palovaara <dan@boklov.com>"
 
 import hexchat
+import re
+from time import strftime
 
 options = {
 	"window": ">>Hilights<<",
