@@ -30,7 +30,7 @@ def callback(word, word_eol, userdata, attrs):
 
 	data = {
 		"channel": hexchat.get_info("channel"),
-		"time": attrs["time"] or strftime(options["time"]),  # @todo what controls attr[time] format and can I get that format string and pass it to strftime?
+		"time": attrs.time or strftime(options["time"]),  # @todo what controls attr[time] format and can I get that format string and pass it to strftime?
 		"nick": word[0],
 		"text": word[1],
 		"mode": word[2] if len(word) > 2 else ""
