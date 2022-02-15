@@ -25,10 +25,6 @@ def callback(word, word_eol, userdata, attrs):
 	
 	if any([hexchat.nickcmp(word[0], ignore) == 0 for ignore in options["ignore"]]):
 		return hexchat.EAT_NONE
-	
-	#context = hexchat.find_context(server=xchat.get_info("server"), channel=options["window"])
-	# @todo are the highlights printed to the right window?
-	context = hexchat.find_context(channel=options["window"])
 
 	data = {
 		"channel": hexchat.get_info("channel"),
@@ -44,6 +40,10 @@ def callback(word, word_eol, userdata, attrs):
 	hexchat.command("query -nofocus {0}".format(options["window"]))
 	if tab_newtofront:
 		hexchat.command("set -quiet gui_tab_newtofront {0}".format(tab_newtofront))
+	
+	#context = hexchat.find_context(server=xchat.get_info("server"), channel=options["window"])
+	# @todo are the highlights printed to the right window?
+	context = hexchat.find_context(channel=options["window"])
 	
 	tpl = options["prefix"] + (__message_tpl__ if userdata == "message" else __action_tpl__)
 	context.prnt(convert_irc_codes(tpl).format(**data))
