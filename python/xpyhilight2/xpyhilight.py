@@ -17,7 +17,10 @@ options = {
 }
 
 def hilight(word, word_eol, userdata, attrs):
-	if options["only_when_away"] and not hexchat.get_info("away") or hexchat.get_prefs("gui_focus_omitalerts") and hexchat.get_info("win_status") == "active":
+	if options["only_when_away"] and not hexchat.get_info("away"):
+		return None
+	
+	if hexchat.get_prefs("gui_focus_omitalerts") and hexchat.get_info("win_status") == "active" and hexchat.find_context() == hexchat.get_context():
 		return None
 	
 	data = {
@@ -30,7 +33,7 @@ def hilight(word, word_eol, userdata, attrs):
 
 	tpl = options["prefix"] + (__message_tpl__ if userdata == "message" else __action_tpl__)
 
-	# @todo are the highlights printed to the right window? otherwise also send server=xchat.get_info("server")
+	# @todo are the highlights printed to the right window? otherwise also send server=hexchat.get_info("server")
 	context = hexchat.find_context(channel=options["window_name"]) or open_window(channel=options["window_name"])
 	context.prnt(convert_irc_codes(tpl).format(**data))
 
